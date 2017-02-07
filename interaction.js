@@ -3,9 +3,10 @@
 // L'interacteur viendra dans un second temps donc ne vous en souciez pas au départ.
 function DnD(canvas, interactor) {
 	var posx0 = 0;
-	var posx1 = 0
-	var posy0 = 0
-	var posy1 = 0
+	var posx1 = 0;
+	var posy0 = 0;
+	var posy1 = 0;
+	var a = 0;
 	var bool = false;
 	// Définir ici les attributs de la 'classe'
 
@@ -15,13 +16,10 @@ function DnD(canvas, interactor) {
 		this.posx0 = getMousePosition(canvas,evt).x;
 		this.posy0 = getMousePosition(canvas,evt).y;
 		console.log("PRESSION : la position du curseur au départ en x est " + this.posx0 + " et en y " + this.posy0);
-		
 	}.bind(this);
 	
 	this.deplacer = function(evt){
-		if(getMousePosition(canvas,evt).x <0 || getMousePosition(canvas,evt).y<0){
-			this.bool=false;
-		}
+		//console.log(getMousePosition(canvas,evt).x);
 		if(this.bool == true){
 		this.posx1 = getMousePosition(canvas,evt).x;
 		this.posy1 = getMousePosition(canvas,evt).y;
@@ -30,8 +28,13 @@ function DnD(canvas, interactor) {
 	}.bind(this);
 	
 	this.relacher = function(evt){
-		this.bool = false;
-		console.log("RELACHER : la position du curseur au départ en x est " + this.posx1 + " et en y " + this.posy1);
+		if(getMousePosition(canvas,evt).x <0 || getMousePosition(canvas,evt).y<0){
+			this.bool=false;
+		}
+		if(this.bool==true){
+			this.bool = false;
+			console.log("RELACHER : la position du curseur au départ en x est " + this.posx1 + " et en y " + this.posy1);
+		}
 	}.bind(this);
 
 	// Associer les fonctions précédentes aux évènements du canvas.
